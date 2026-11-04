@@ -53,6 +53,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08, y: 0.16, z: 0.08}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1213540059366512840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7886555890789195705}
+  - component: {fileID: 7628665474078906943}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7886555890789195705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213540059366512840}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.523, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 690029046195140712}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7628665474078906943
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213540059366512840}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.14734733, y: 0.8561968, z: 0.026889801}
+  m_Center: {x: -0.00061261654, y: 0.09347221, z: 0.000014781952}
 --- !u!1 &2427636723355565586
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,7 +121,6 @@ GameObject:
   - component: {fileID: 1911613903586171894}
   - component: {fileID: 2240748931525114429}
   - component: {fileID: 4408231253498313639}
-  - component: {fileID: 4303681068943322311}
   m_Layer: 0
   m_Name: Sword_01
   m_TagString: Untagged
@@ -91,6 +143,7 @@ Transform:
   m_Children:
   - {fileID: 3994358058409933668}
   - {fileID: 364190995824031954}
+  - {fileID: 7886555890789195705}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5992269528978413754
@@ -353,19 +406,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2490357807671972370, guid: d00dec123be83b445adbe6c8f3f02f41, type: 3}
---- !u!114 &4303681068943322311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2427636723355565586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db592480666ade247ad2faa3b9b510a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MedievalVR.Combat.WeaponImpact
-  baseDamage: 20
 --- !u!1 &6669425626898988646
 GameObject:
   m_ObjectHideFlags: 0
