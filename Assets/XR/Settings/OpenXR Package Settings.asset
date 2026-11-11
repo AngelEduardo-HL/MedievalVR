@@ -358,6 +358,28 @@ MonoBehaviour:
   targetOpenXRApiVersion: 
   required: 0
   customRuntimeLoaderName: 
+--- !u!114 &-7171430300164897620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c36843bac48b29469f79baf3c98f9b6, type: 3}
+  m_Name: AndroidXRHandMeshData Standalone
+  m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRHandMeshData
+  m_enabled: 0
+  nameUi: 'Android XR: Hand Mesh Data'
+  version: 0.1.0
+  featureIdInternal: com.unity.openxr.feature.androidxr-hand-mesh-data
+  openxrExtensionStrings: XR_ANDROID_hand_mesh
+  company: Unity Technologies
+  priority: 0
+  targetOpenXRApiVersion: 
+  required: 0
+  customRuntimeLoaderName: 
 --- !u!114 &-7090456572119811632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,8 +919,9 @@ MonoBehaviour:
   features:
   - {fileID: -5535048415428493995}
   - {fileID: 5093400270913989207}
+  - {fileID: -7171430300164897620}
+  - {fileID: 5778875981656410779}
   - {fileID: -3265715103835444174}
-  - {fileID: 3972726374066908796}
   - {fileID: -6551254453808814296}
   - {fileID: 574367180042719413}
   - {fileID: -3914440816520234427}
@@ -908,7 +931,6 @@ MonoBehaviour:
   - {fileID: 8476058265081450935}
   - {fileID: 350615282036339554}
   - {fileID: 2699993091929143569}
-  - {fileID: 3428725577421645950}
   - {fileID: -6757421756752436529}
   - {fileID: 3383279496136233866}
   - {fileID: -1373891422636031554}
@@ -1914,7 +1936,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c36843bac48b29469f79baf3c98f9b6, type: 3}
-  m_Name: AndroidXRHandMeshData Standalone
+  m_Name: AndroidXRHandMeshData Android
   m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRHandMeshData
   m_enabled: 0
   nameUi: 'Android XR: Hand Mesh Data'
@@ -2002,7 +2024,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90ae1e8c3c7a542bba339faf2e771c5a, type: 3}
-  m_Name: AndroidXRSupportFeature Standalone
+  m_Name: AndroidXRSupportFeature Android
   m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRSupportFeature
   m_enabled: 0
   nameUi: Android XR Support
@@ -2224,6 +2246,32 @@ MonoBehaviour:
   required: 0
   customRuntimeLoaderName: 
   m_AutoStartSubsystem: 1
+--- !u!114 &5778875981656410779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ae1e8c3c7a542bba339faf2e771c5a, type: 3}
+  m_Name: AndroidXRSupportFeature Standalone
+  m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRSupportFeature
+  m_enabled: 0
+  nameUi: Android XR Support
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.androidxr-support
+  openxrExtensionStrings: 
+  company: Unity Technologies
+  priority: 0
+  targetOpenXRApiVersion: 
+  required: 0
+  customRuntimeLoaderName: 
+  optionalFeatures: []
+  symmetricProjection: 0
+  optimizeBufferDiscards: 1
+  multiviewRenderRegionsOptimizationMode: 0
 --- !u!114 &5924469931971792789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2544,7 +2592,7 @@ MonoBehaviour:
   - {fileID: -4758178402752654532}
   - {fileID: -5163624585541340832}
   - {fileID: -358536948040196620}
-  - {fileID: 165873264927053069}
+  - {fileID: 3972726374066908796}
   - {fileID: 4316114375043398199}
   - {fileID: -7471591852261609628}
   - {fileID: -8415101461742962352}
@@ -2555,7 +2603,7 @@ MonoBehaviour:
   - {fileID: -8465644773379468629}
   - {fileID: -4705909378347833982}
   - {fileID: -5004506247908388149}
-  - {fileID: -5978550946657229204}
+  - {fileID: 3428725577421645950}
   - {fileID: 7909005411019954550}
   - {fileID: 8575319001423295611}
   - {fileID: -6115132529233722115}
