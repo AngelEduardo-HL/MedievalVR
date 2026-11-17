@@ -5,6 +5,7 @@ using System.IO;
 using MedievalVR.Combat;
 using TMPro;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -18,6 +19,7 @@ namespace MedievalVR.Editor
     public static class CombatValidation
     {
         const string PendingTest = "MedievalVR.CombatValidation.Pending";
+        const string MainScenePath = "Assets/_MedievalVR/Scenes/MainGame.unity";
         public const string ReportPath = "Temp/InitialCombat/validation.txt";
         public static readonly string[] WeaponNames =
             { "Sword_01", "Shield_01", "Dagger_01", "Ax_01", "Hammer_01", "Bow_01", "Arrow_01" };
@@ -65,8 +67,9 @@ namespace MedievalVR.Editor
         public static void RunPlayModeChecks()
         {
             Require(!EditorApplication.isPlayingOrWillChangePlaymode, "Stop Play before starting checks.");
-            Require(SceneManager.GetActiveScene().path.EndsWith("/MainGame.unity") &&
-                !SceneManager.GetActiveScene().isDirty, "Save MainGame before starting checks.");
+            var scene = Application.isBatchMode
+                ? EditorSceneManager.OpenScene(MainScenePath) : SceneManager.GetActiveScene();
+            Require(scene.path.EndsWith("/MainGame.unity") && !scene.isDirty, "Save MainGame before starting checks.");
             ValidatePrefabs();
             Directory.CreateDirectory("Temp/InitialCombat");
             File.WriteAllText(ReportPath, "RUNNING\n");
@@ -173,11 +176,14 @@ namespace MedievalVR.Editor
 
                 hand.Holding = false;
                 hand.Target = null;
+                grab.throwOnDetach = false;
                 manager.SelectExit((IXRSelectInteractor)hand, (IXRSelectInteractable)grab);
+                CombatValidation.Require(!grab.isSelected && !body.isKinematic && body.useGravity,
+                    name + ": releasing did not restore gravity");
+                body.linearVelocity = Vector3.zero;
                 float releaseHeight = body.position.y;
                 for (int i = 0; i < 25; i++) yield return new WaitForFixedUpdate();
-                CombatValidation.Require(!grab.isSelected && !body.isKinematic && body.useGravity && body.position.y < releaseHeight - .1f,
-                    name + ": releasing did not restore gravity");
+                CombatValidation.Require(body.position.y < releaseHeight - .1f, name + ": weapon did not fall after release");
                 passed.Add(name + ": handle-only selection, pose tracking and gravity after release");
                 Object.Destroy(weapon);
                 Object.Destroy(handObject);
@@ -256,6 +262,47 @@ namespace MedievalVR.Editor
             Object.Destroy(shot);
             yield return null;
 
+            var daggerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_MedievalVR/Prefabs/Weapons/Dagger_01.prefab");
+            target.ResetHealth();
+            shot = Keep(Object.Instantiate(daggerPrefab, center + Vector3.back * .75f, Quaternion.identity));
+            var slowDagger = shot.GetComponent<Rigidbody>();
+            slowDagger.useGravity = false;
+            slowDagger.linearVelocity = Vector3.forward * .8f;
+            for (int i = 0; i < 55; i++) yield return new WaitForFixedUpdate();
+            CombatValidation.Require(slowDagger.position.z < center.z, "The slow dagger did not contact the target.");
+            CombatValidation.Require(target.CurrentHealth == 100f, "A slow dagger poke dealt damage.");
+            Object.Destroy(shot);
+            yield return null;
+
+            shot = Keep(Object.Instantiate(daggerPrefab, center + Vector3.back * .75f, Quaternion.identity));
+            var fastDagger = shot.GetComponent<Rigidbody>();
+            fastDagger.useGravity = false;
+            fastDagger.linearVelocity = Vector3.forward * 3f;
+            for (int i = 0; i < 30; i++) yield return new WaitForFixedUpdate();
+            CombatValidation.Require(target.CurrentHealth == 85f, "A fast dagger strike did not deal 15 damage.");
+            passed.Add("A slow dagger poke deals zero damage; a fast strike deals 15");
+            Object.Destroy(shot);
+            yield return null;
+
+            Vector3 runnerStart = center + Vector3.right * 4f;
+            var runner = Keep(Object.Instantiate(targetPrefab, runnerStart, Quaternion.identity));
+            var runnerBody = runner.GetComponent<Rigidbody>();
+            runnerBody.isKinematic = false;
+            runnerBody.mass = 10f;
+            runnerBody.linearVelocity = Vector3.forward * 4f;
+            Vector3 daggerStart = runnerStart + Vector3.forward * .75f;
+            shot = Keep(Object.Instantiate(daggerPrefab, daggerStart, Quaternion.identity));
+            var restingDagger = shot.GetComponent<Rigidbody>();
+            restingDagger.useGravity = false;
+            for (int i = 0; i < 25; i++) yield return new WaitForFixedUpdate();
+            CombatValidation.Require(restingDagger.position.z > daggerStart.z + .05f, "The moving target did not push the dagger.");
+            CombatValidation.Require(runner.GetComponent<DamageableTarget>().CurrentHealth == 100f,
+                "A moving target took damage from a stationary dagger.");
+            passed.Add("A target can run into and push a stationary weapon without taking damage");
+            Object.Destroy(runner);
+            Object.Destroy(shot);
+            yield return null;
+
             target.ResetHealth();
             int deaths = 0;
             float healthAtDeath = -1f;
@@ -302,7 +349,10 @@ namespace MedievalVR.Editor
             File.WriteAllText(CombatValidation.ReportPath, report);
             if (failure == null) Debug.Log("[MedievalVR] All combat checks passed. " + passed.Count + " checks.");
             else Debug.LogException(failure);
-            EditorApplication.delayCall += EditorApplication.ExitPlaymode;
+            if (Application.isBatchMode)
+                EditorApplication.delayCall += () => EditorApplication.Exit(failure == null ? 0 : 1);
+            else
+                EditorApplication.delayCall += EditorApplication.ExitPlaymode;
         }
     }
 }

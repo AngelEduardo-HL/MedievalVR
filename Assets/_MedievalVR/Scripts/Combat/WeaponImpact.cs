@@ -8,6 +8,8 @@ namespace MedievalVR.Combat
     {
         [SerializeField, Min(0f), Tooltip("Daño por golpe.")]
         float baseDamage = 20f;
+        [SerializeField, Min(0.1f), Tooltip("Velocidad mínima (m/s).")]
+        float minimumImpactSpeed = 1.5f;
 
         Rigidbody body;
         Vector3 previousLinearVelocity;
@@ -15,6 +17,7 @@ namespace MedievalVR.Combat
         Vector3 previousCenterOfMass;
 
         public float BaseDamage => baseDamage;
+        public float MinimumImpactSpeed => minimumImpactSpeed;
 
         void Awake()
         {
@@ -29,13 +32,12 @@ namespace MedievalVR.Combat
             previousCenterOfMass = body.worldCenterOfMass;
         }
 
-        public float GetContactSpeed(Vector3 point)
+        public float GetIncomingContactSpeed(Vector3 point)
         {
-            // Keep the incoming angular motion even if the collision solver has
-            // already slowed the Rigidbody by the time OnCollisionEnter runs.
-            Vector3 incomingVelocity = previousLinearVelocity +
+            // La colisión ya pudo cambiar la velocidad del Rigidbody.
+            Vector3 velocity = previousLinearVelocity +
                 Vector3.Cross(previousAngularVelocity, point - previousCenterOfMass);
-            return Mathf.Max(body.GetPointVelocity(point).magnitude, incomingVelocity.magnitude);
+            return velocity.magnitude;
         }
     }
 }
