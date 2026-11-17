@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 1911613903586171894}
   - component: {fileID: 2240748931525114429}
   - component: {fileID: 4408231253498313639}
+  - component: {fileID: 4303681068943322311}
   m_Layer: 0
   m_Name: Sword_01
   m_TagString: Untagged
@@ -406,6 +407,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2490357807671972370, guid: d00dec123be83b445adbe6c8f3f02f41, type: 3}
+--- !u!114 &4303681068943322311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427636723355565586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db592480666ade247ad2faa3b9b510a6, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::MedievalVR.Combat.WeaponImpact
+  baseDamage: 20
 --- !u!1 &6669425626898988646
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,17 +50,22 @@ namespace MedievalVR.Combat
             Rigidbody otherBody = collision.rigidbody;
             if (IsDead || otherBody == null || otherBody.transform.IsChildOf(transform)) return;
 
-            float impactSpeed = collision.relativeVelocity.magnitude;
             var weapon = otherBody.GetComponent<WeaponImpact>();
+            if (weapon != null && !weapon.isActiveAndEnabled) return;
+
+            float impactSpeed = weapon != null ? 0f : collision.relativeVelocity.magnitude;
+            float requiredSpeed = weapon != null
+                ? Mathf.Max(minimumImpactSpeed, weapon.MinimumImpactSpeed) : minimumImpactSpeed;
             for (int i = 0; i < collision.contactCount; i++)
             {
                 Vector3 point = collision.GetContact(i).point;
                 float contactSpeed = weapon != null
-                    ? weapon.GetContactSpeed(point) : otherBody.GetPointVelocity(point).magnitude;
+                    ? weapon.GetIncomingContactSpeed(point) : otherBody.GetPointVelocity(point).magnitude;
                 impactSpeed = Mathf.Max(impactSpeed, contactSpeed);
             }
 
-            if (float.IsNaN(impactSpeed) || float.IsInfinity(impactSpeed) || impactSpeed < minimumImpactSpeed)
+            if (float.IsNaN(impactSpeed) || float.IsInfinity(impactSpeed) || impactSpeed <= 0f ||
+                impactSpeed < requiredSpeed)
                 return;
 
             int sourceId = otherBody.GetInstanceID();
