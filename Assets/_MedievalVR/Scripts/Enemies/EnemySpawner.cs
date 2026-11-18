@@ -2,37 +2,19 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; 
-    public Transform spawnPoint; 
-    public int spawnInterval = 5; 
-    public int maxEnemies = 5;
-    int currentEnemies;
+    public GameObject[] enemyPrefabs;
+    public Transform spawnPoint;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject SpawnEnemy(int prefabIndex)
     {
-        StartSpawning(maxEnemies);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
- 
-    }
-
-    public void SpawnEnemy()
-    {
-        if (currentEnemies >= maxEnemies) return;
-        Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
-        currentEnemies++;
-
-    }
-
-    public void StartSpawning(int count)
-    {
-        InvokeRepeating("SpawnEnemy", 1f, spawnInterval);
+        return Instantiate(enemyPrefabs[prefabIndex], spawnPoint.position, Quaternion.identity);
     }
 
 
+    public GameObject SpawnRandomEnemy(int maxTypeIndex)
+    {
+        int randomIndex = Random.Range(0, maxTypeIndex + 1);
+        return Instantiate(enemyPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
+    }
 }
