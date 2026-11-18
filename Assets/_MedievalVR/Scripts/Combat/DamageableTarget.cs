@@ -104,6 +104,12 @@ namespace MedievalVR.Combat
             HealthChanged?.Invoke(this);
         }
 
+        public void SetHealth(float newHealth)
+        {
+            maximumHealth = Mathf.Max(1f, newHealth);
+            ResetHealth();
+        }
+
         void Update()
         {
             if (!flashing || Time.time < flashUntil) return;
