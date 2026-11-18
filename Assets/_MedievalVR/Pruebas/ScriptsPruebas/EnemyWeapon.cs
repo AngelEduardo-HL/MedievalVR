@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyWeapon : MonoBehaviour
 {
     public GameObject[] weapons;
+    GameObject currentWeapon;
 
     public void EquipRandomWeapon()
     {
@@ -13,5 +14,12 @@ public class EnemyWeapon : MonoBehaviour
 
         int chosen = Random.Range(0, weapons.Length);
         weapons[chosen].SetActive(true);
+        currentWeapon = weapons[chosen];
     }
+
+    public void UnequipWeapon()
+    {
+        currentWeapon.transform.parent = null;
+    }
+
 }
