@@ -645,6 +645,7 @@ Transform:
   - {fileID: 4428487550615400548}
   - {fileID: 2847937359010459854}
   - {fileID: 5045040232270358139}
+  - {fileID: 6522863639021578009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2281423742953802410
@@ -681,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e7c797f0db8a84abdab5f0f58d27ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chase
-  speed: 5
+  speed: 2
   stopDistance: 2
   separationRadius: 1.2
   separationForce: 2
@@ -768,6 +769,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
   weapons:
   - {fileID: 1345932235927129491}
+  playerWeapons:
+  - {fileID: 1976559896634481396, guid: f68b239999a8e724599998fd0822b4db, type: 3}
+  spawnWeaponPlayer: {fileID: 6522863639021578009}
 --- !u!114 &629204143696935553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,6 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeath
   scorePoints: {fileID: 1036270865178573829}
   healthText: {fileID: 1541144535299928305}
+  healthDrop: {fileID: 6928884200398554929, guid: ff15e6e47b3f5d54394808c0bf17afa5, type: 3}
 --- !u!1 &2518099980878712591
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,6 +1480,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4595576451268767806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6522863639021578009}
+  m_Layer: 0
+  m_Name: SpawnWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6522863639021578009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4595576451268767806}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.014, y: 2.208, z: -0.021}
+  m_LocalScale: {x: 0.8928572, y: 0.8928572, z: 0.8928572}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1698508409737027212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5187952907471780212
 GameObject:
   m_ObjectHideFlags: 0

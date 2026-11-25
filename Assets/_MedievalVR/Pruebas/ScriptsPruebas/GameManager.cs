@@ -1,28 +1,28 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //Lógica del juego, control de estados, puntuación, etc.
+    public static GameManager instance;
 
+    public int score = 0;
+    public TextMeshProUGUI scoreText;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
+        instance = this;
+        UpdateUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddPoints(int points)
     {
-        
+        score += points;
+        UpdateUI();
     }
 
-    public void Oleadas()
+    void UpdateUI()
     {
-
+        if (scoreText != null)
+            scoreText.text = "Puntos: " + score;
     }
-
-
-
 }

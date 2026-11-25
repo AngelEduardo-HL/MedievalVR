@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5682590262434817432
 Transform:
   m_ObjectHideFlags: 0
@@ -609,6 +609,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08, y: 0.16, z: 0.08}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &3081667828210199675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5021574808624789150}
+  m_Layer: 0
+  m_Name: SpawnWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5021574808624789150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081667828210199675}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.014000001, y: 2.2080002, z: -0.021000002}
+  m_LocalScale: {x: 0.8928572, y: 0.8928572, z: 0.8928572}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4061842756981719025}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3122682842749731598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,6 +1579,7 @@ Transform:
   m_LocalScale: {x: 1.12, y: 1.12, z: 1.12}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 5021574808624789150}
   - {fileID: 5852233771048749610}
   - {fileID: 3322069098476732367}
   - {fileID: 989252981052608694}
@@ -1675,6 +1707,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
   weapons:
   - {fileID: 82158614862084241}
+  playerWeapons:
+  - {fileID: 2427636723355565586, guid: d2f2d8796c81b88418d64ceaf53cef17, type: 3}
+  spawnWeaponPlayer: {fileID: 5021574808624789150}
 --- !u!114 &6298453077958272384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1689,6 +1724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeath
   scorePoints: {fileID: 8436845118551718060}
   healthText: {fileID: 5975035241167584655}
+  healthDrop: {fileID: 6928884200398554929, guid: ff15e6e47b3f5d54394808c0bf17afa5, type: 3}
 --- !u!1 &6909274221425393252
 GameObject:
   m_ObjectHideFlags: 0

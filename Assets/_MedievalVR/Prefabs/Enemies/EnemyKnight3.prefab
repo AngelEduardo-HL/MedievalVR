@@ -101,6 +101,7 @@ Transform:
   m_LocalScale: {x: 1.12, y: 1.12, z: 1.12}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1834931486126454260}
   - {fileID: 5958925142655745142}
   - {fileID: 4426908425273165424}
   - {fileID: 4811579017606728608}
@@ -141,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e7c797f0db8a84abdab5f0f58d27ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chase
-  speed: 5
+  speed: 3
   stopDistance: 2
   separationRadius: 1.2
   separationForce: 2
@@ -230,6 +231,11 @@ MonoBehaviour:
   - {fileID: 3248050268686568030}
   - {fileID: 2243459373835456488}
   - {fileID: 5001297490141848548}
+  playerWeapons:
+  - {fileID: 2427636723355565586, guid: d2f2d8796c81b88418d64ceaf53cef17, type: 3}
+  - {fileID: 8491109368870530652, guid: 8729bb462875ac54798ab6f09201d3ca, type: 3}
+  - {fileID: 4124436245846001543, guid: c5a7da306856b1b45a61a8905c0c7f2a, type: 3}
+  spawnWeaponPlayer: {fileID: 1834931486126454260}
 --- !u!114 &-7120212725003727269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeath
   scorePoints: {fileID: 9095662360138366856}
   healthText: {fileID: 2625520400355384359}
+  healthDrop: {fileID: 6928884200398554929, guid: ff15e6e47b3f5d54394808c0bf17afa5, type: 3}
 --- !u!1 &1033367593284963109
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,7 +866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5266524129629641461
 Transform:
   m_ObjectHideFlags: 0
@@ -1649,6 +1656,37 @@ Transform:
   m_Children:
   - {fileID: 3850839692953724353}
   m_Father: {fileID: 9087059432314546387}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6341765615726369557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1834931486126454260}
+  m_Layer: 0
+  m_Name: SpawnWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1834931486126454260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341765615726369557}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.014000001, y: 2.2080002, z: -0.021000002}
+  m_LocalScale: {x: 0.8928572, y: 0.8928572, z: 0.8928572}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7440942302707998099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6395290427858547802
 GameObject:

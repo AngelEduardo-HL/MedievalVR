@@ -32,6 +32,7 @@ public class EnemyWeapon : MonoBehaviour
     public void DropPlayerWeapon()
     {
         Instantiate(weaponPlayerDropped,spawnWeaponPlayer);
+
     }
 
 }

@@ -14,6 +14,9 @@ public class WaveLogic : MonoBehaviour
     public int enemiesSpawned;
     public int enemiesAlive;
 
+    public Victory victory;
+
+
     void Start()
     {
         SetWave();
@@ -24,28 +27,28 @@ public class WaveLogic : MonoBehaviour
         switch (currentWave)
         {
             case 1:
-                enemiesPerWave = 5;
-                enemiesHealth = 50f;
+                enemiesPerWave = 3;
+                enemiesHealth = 20f;
                 break;
             case 2:
+                enemiesPerWave = 5;
+                enemiesHealth = 40f;
+                break;
+            case 3:
+                enemiesPerWave = 7;
+                enemiesHealth = 60f;
+                break;
+            case 4:
                 enemiesPerWave = 10;
                 enemiesHealth = 80f;
                 break;
-            case 3:
-                enemiesPerWave = 15;
-                enemiesHealth = 120f;
-                break;
-            case 4:
-                enemiesPerWave = 20;
-                enemiesHealth = 160f;
-                break;
             case 5:
-                enemiesPerWave = 25;
-                enemiesHealth = 220f;
+                enemiesPerWave = 15;
+                enemiesHealth = 100f;
                 break;
-            default:
-                Debug.Log("¡Victoria!");
-                return;
+            case 6:
+                victory.PlayFireworks();
+                break;
         }
 
         enemiesSpawned = 0;
@@ -75,6 +78,7 @@ public class WaveLogic : MonoBehaviour
             target.SetHealth(enemiesHealth);
             target.Died += OnEnemyDied;
         }
+
     }
 
     void AssignWeaponForEnemy(GameObject enemy, int enemyType)

@@ -4,9 +4,13 @@ using System.Collections;
 
 public class EnemyDeath : MonoBehaviour
 {
-    ScoreManager scoreManager;
     public GameObject scorePoints;
     public GameObject healthText;
+
+    public GameObject healthDrop;
+
+    public int scoreValue = 10;
+    int healthDropChance = 30; 
 
     void Start()
     {
@@ -15,6 +19,11 @@ public class EnemyDeath : MonoBehaviour
 
     void OnDied(DamageableTarget target)
     {
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.AddPoints(scoreValue);
+        }
+
         //scoreManager.AddPoints(10);
         GetComponent<Chase>().enabled = false;
         healthText.SetActive(false);
@@ -22,6 +31,7 @@ public class EnemyDeath : MonoBehaviour
         this.GetComponentInChildren<EnemyWeapon>().UnequipWeapon();
         this.GetComponentInChildren<EnemyWeapon>().DropPlayerWeapon();
         StartCoroutine(ShowPoints(2.0f));
+        
         Destroy(gameObject, 5f);
     }
 
@@ -31,6 +41,20 @@ public class EnemyDeath : MonoBehaviour
         scorePoints.SetActive(true);
         yield return new WaitForSeconds(segundos);
         scorePoints.SetActive(false);
+        DropHealth();
     }
+
+    public void DropHealth()
+    {
+        if (Random.Range(0, 100) < healthDropChance)
+        {
+            Instantiate(healthDrop, transform.position, Quaternion.identity);
+        }
+        else 
+        { 
+            return; 
+        }
+    }
+
 
 }
