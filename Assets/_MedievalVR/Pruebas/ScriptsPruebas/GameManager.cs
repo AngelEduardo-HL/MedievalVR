@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
+    void OnDestroy()
+    {
+        if (instance == this) instance = null;
+    }
+
     public void AddPoints(int points)
     {
         score += points;

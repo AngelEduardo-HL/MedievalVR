@@ -2761,6 +2761,7 @@ GameObject:
   - component: {fileID: 4805763384645602186}
   - component: {fileID: 747841747206927254}
   - component: {fileID: -1216889794596818649}
+  - component: {fileID: 4381835279592430707}
   m_Layer: 0
   m_Name: CitizenFemale2
   m_TagString: Untagged
@@ -2822,8 +2823,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Citizen
   citizenPrefab: []
-  citizenMaterial: {fileID: 0}
-  animations: []
+  citizenMaterial:
+  - {fileID: 0}
+  arenaCenter: {fileID: 0}
+  rows: 5
+  columns: 10
+  spacing: 1.5
+--- !u!114 &4381835279592430707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836199136803181876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda7c72a3da5c944cb764ac6f5de3728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CitizensReaction
+  cheerAnimations:
+  - Clap 01
+  - Clap 02
+  - Clap 03
+  - Clap 04
+  - Cheer 01
+  - Cheer 02
+  booAnimations:
+  - Disbelief 01
+  - Disbelief 02
+  - Disbelief 03
+  - Angry
+  - Yell 01
+  - Yell 02
 --- !u!1 &7883543693917806441
 GameObject:
   m_ObjectHideFlags: 0

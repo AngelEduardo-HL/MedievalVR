@@ -1,4 +1,5 @@
 using System.IO;
+using Unity.XR.CoreUtils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -81,14 +82,16 @@ namespace MedievalVR.Editor
                 return;
             }
 
-            bool headset = HasRealHeadset();
             EditorApplication.update -= SelectInput;
+            var origin = Object.FindFirstObjectByType<XROrigin>();
+            if (origin == null || origin.Camera == null) return;
+
             bool useSimulator = Mode == PlayMode.Keyboard;
             var existing = Object.FindFirstObjectByType<XRInteractionSimulator>();
             if (!useSimulator)
             {
                 if (existing != null) Object.Destroy(existing.gameObject);
-                if (!headset) Debug.LogWarning("Conecta Quest Link antes de Play.");
+                if (!HasRealHeadset()) Debug.LogWarning("Conecta Quest Link antes de Play.");
                 return;
             }
 

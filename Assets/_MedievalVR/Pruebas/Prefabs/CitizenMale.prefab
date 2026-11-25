@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 2707141773283271864}
   - component: {fileID: 4316432839692953906}
   - component: {fileID: -6717954382678583983}
+  - component: {fileID: 7409182337445110241}
   m_Layer: 0
   m_Name: CitizenMale
   m_TagString: Untagged
@@ -297,8 +298,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Citizen
   citizenPrefab: []
-  citizenMaterial: {fileID: 0}
-  animations: []
+  citizenMaterial:
+  - {fileID: 0}
+  arenaCenter: {fileID: 0}
+  rows: 5
+  columns: 10
+  spacing: 1.5
+--- !u!114 &7409182337445110241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380262895151771276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda7c72a3da5c944cb764ac6f5de3728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CitizensReaction
+  cheerAnimations:
+  - Clap 01
+  - Clap 02
+  - Clap 03
+  - Clap 04
+  - Cheer 01
+  - Cheer 02
+  booAnimations:
+  - Disbelief 01
+  - Disbelief 02
+  - Disbelief 03
+  - Angry
+  - Yell 01
+  - Yell 02
 --- !u!1 &383991800271341609
 GameObject:
   m_ObjectHideFlags: 0

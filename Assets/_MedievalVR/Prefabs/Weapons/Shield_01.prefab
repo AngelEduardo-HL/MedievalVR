@@ -366,6 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MedievalVR.Combat.WeaponImpact
   baseDamage: 10
+  equipmentKind: 4
 --- !u!1 &8649772677077228857
 GameObject:
   m_ObjectHideFlags: 0

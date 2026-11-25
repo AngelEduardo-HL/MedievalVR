@@ -861,6 +861,8 @@ MonoBehaviour:
   spawner: {fileID: 1303661227}
   spawnInterval: 3
   timeBetweenWaves: 5
+  playerHealth: {fileID: 1929197286}
+  roundHealing: 20
   currentWave: 5
   enemiesPerWave: 0
   enemiesHealth: 0
@@ -1255,6 +1257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1737387335}
   - component: {fileID: 1737387334}
+  - component: {fileID: 1737387336}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1291,6 +1294,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1737387336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737387333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f200961b1f27076468faa7d042ca8b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaManager
+  charisma: 0.5
 --- !u!1 &1755352677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,6 +1542,7 @@ GameObject:
   - component: {fileID: 1929197281}
   - component: {fileID: 1929197280}
   - component: {fileID: 1929197285}
+  - component: {fileID: 1929197286}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1655,6 +1672,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1929197286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929197279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a924dc95dcd7f4680a1fb98e238571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MedievalVR.Combat.DamageableTarget
+  maximumHealth: 100
+  defaultImpactDamage: 20
+  minimumImpactSpeed: 0.5
+  sameObjectHitCooldown: 0.25
+  destroyOnDeath: 0
+  receiveCollisionDamage: 0
+  targetRenderer: {fileID: 0}
+  hitFlashDuration: 0.08
+  currentHealth: 100
 --- !u!1 &1949748820
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,6 +2329,7 @@ GameObject:
   - component: {fileID: 4368168760800475065}
   - component: {fileID: 5281404062270486243}
   - component: {fileID: 8790001568283943049}
+  - component: {fileID: 8790001568283943050}
   m_Layer: 0
   m_Name: CitizenFemale1
   m_TagString: Untagged
@@ -2515,8 +2554,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Citizen
   citizenPrefab: []
-  citizenMaterial: {fileID: 0}
-  animations: []
+  citizenMaterial:
+  - {fileID: 0}
+  arenaCenter: {fileID: 0}
+  rows: 5
+  columns: 10
+  spacing: 1.5
 --- !u!4 &626989319838377495
 Transform:
   m_ObjectHideFlags: 0
@@ -5188,6 +5231,7 @@ GameObject:
   - component: {fileID: 51224333071221054}
   - component: {fileID: 2216689760150228148}
   - component: {fileID: 567813432427983063}
+  - component: {fileID: 2333630199317580555}
   m_Layer: 0
   m_Name: CitizenMale
   m_TagString: Untagged
@@ -5195,6 +5239,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2333630199317580555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333630199317580554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda7c72a3da5c944cb764ac6f5de3728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CitizensReaction
+  cheerAnimations:
+  - Clap 01
+  - Clap 02
+  - Clap 03
+  - Clap 04
+  - Cheer 01
+  - Cheer 02
+  booAnimations:
+  - Disbelief 01
+  - Disbelief 02
+  - Disbelief 03
+  - Angry
+  - Yell 01
+  - Yell 02
 --- !u!1 &2337502183721577903
 GameObject:
   m_ObjectHideFlags: 0
@@ -5817,6 +5887,7 @@ GameObject:
   - component: {fileID: 8090681917622048910}
   - component: {fileID: 1160619675629825224}
   - component: {fileID: 8453627515215708187}
+  - component: {fileID: 8453627515215708188}
   m_Layer: 0
   m_Name: CitizenBoy
   m_TagString: Untagged
@@ -11237,6 +11308,7 @@ GameObject:
   - component: {fileID: 8540248719719995977}
   - component: {fileID: 4491303493062992469}
   - component: {fileID: 6568556739992903908}
+  - component: {fileID: 8540248719719995978}
   m_Layer: 0
   m_Name: CitizenFemale2
   m_TagString: Untagged
@@ -11530,8 +11602,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Citizen
   citizenPrefab: []
-  citizenMaterial: {fileID: 0}
-  animations: []
+  citizenMaterial:
+  - {fileID: 0}
+  arenaCenter: {fileID: 0}
+  rows: 5
+  columns: 10
+  spacing: 1.5
 --- !u!1 &6579324644642043781
 GameObject:
   m_ObjectHideFlags: 0
@@ -14393,8 +14469,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Citizen
   citizenPrefab: []
-  citizenMaterial: {fileID: 0}
-  animations: []
+  citizenMaterial:
+  - {fileID: 0}
+  arenaCenter: {fileID: 0}
+  rows: 5
+  columns: 10
+  spacing: 1.5
+--- !u!114 &8453627515215708188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703597819914231252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda7c72a3da5c944cb764ac6f5de3728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CitizensReaction
+  cheerAnimations:
+  - Clap 01
+  - Clap 02
+  - Clap 03
+  - Clap 04
+  - Cheer 01
+  - Cheer 02
+  booAnimations:
+  - Disbelief 01
+  - Disbelief 02
+  - Disbelief 03
+  - Angry
+  - Yell 01
+  - Yell 02
 --- !u!4 &8458380143987282711
 Transform:
   m_ObjectHideFlags: 0
@@ -14608,6 +14714,32 @@ Transform:
   - {fileID: 7032575379557273960}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8540248719719995978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6380276003849372919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda7c72a3da5c944cb764ac6f5de3728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CitizensReaction
+  cheerAnimations:
+  - Clap 01
+  - Clap 02
+  - Clap 03
+  - Clap 04
+  - Cheer 01
+  - Cheer 02
+  booAnimations:
+  - Disbelief 01
+  - Disbelief 02
+  - Disbelief 03
+  - Angry
+  - Yell 01
+  - Yell 02
 --- !u!4 &8551186656809586331
 Transform:
   m_ObjectHideFlags: 0
@@ -14986,8 +15118,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Citizen
   citizenPrefab: []
-  citizenMaterial: {fileID: 0}
-  animations: []
+  citizenMaterial:
+  - {fileID: 0}
+  arenaCenter: {fileID: 0}
+  rows: 5
+  columns: 10
+  spacing: 1.5
+--- !u!114 &8790001568283943050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321378725257256708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda7c72a3da5c944cb764ac6f5de3728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CitizensReaction
+  cheerAnimations:
+  - Clap 01
+  - Clap 02
+  - Clap 03
+  - Clap 04
+  - Cheer 01
+  - Cheer 02
+  booAnimations:
+  - Disbelief 01
+  - Disbelief 02
+  - Disbelief 03
+  - Angry
+  - Yell 01
+  - Yell 02
 --- !u!1 &8790485555783559707
 GameObject:
   m_ObjectHideFlags: 0

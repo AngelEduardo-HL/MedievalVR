@@ -3,9 +3,13 @@ using MedievalVR.Combat;
 
 public class WaveLogic : MonoBehaviour
 {
+    const int FinalWave = 5;
+
     public EnemySpawner spawner;
     public float spawnInterval = 3f;
     public float timeBetweenWaves = 5f;
+    [SerializeField] DamageableTarget playerHealth;
+    [SerializeField, Min(0f), Tooltip("Vida entre rondas.")] float roundHealing = 20f;
 
     public int currentWave = 1;
     public int enemiesPerWave;
@@ -16,14 +20,32 @@ public class WaveLogic : MonoBehaviour
 
     public Victory victory;
 
-
     void Start()
     {
         SetWave();
     }
 
+    void OnEnable()
+    {
+        if (playerHealth != null) playerHealth.Died += StopWaves;
+    }
+
+    void OnDisable()
+    {
+        if (playerHealth != null) playerHealth.Died -= StopWaves;
+    }
+
+    void StopWaves(DamageableTarget player) => CancelInvoke();
+
     void SetWave()
     {
+        if (playerHealth != null && playerHealth.IsDead) return;
+        if (currentWave == FinalWave + 1)
+        {
+            if (victory != null) victory.PlayFireworks();
+            return;
+        }
+
         switch (currentWave)
         {
             case 1:
@@ -46,9 +68,8 @@ public class WaveLogic : MonoBehaviour
                 enemiesPerWave = 15;
                 enemiesHealth = 100f;
                 break;
-            case 6:
-                victory.PlayFireworks();
-                break;
+            default:
+                return;
         }
 
         enemiesSpawned = 0;
@@ -66,11 +87,10 @@ public class WaveLogic : MonoBehaviour
 
         int maxEnemyIndex = Mathf.Min(currentWave - 1, 4);
         int enemyType = Random.Range(0, maxEnemyIndex + 1);
-
         GameObject enemy = spawner.SpawnEnemy(enemyType);
         enemiesSpawned++;
 
-        AssignWeaponForEnemy(enemy, enemyType);
+        AssignWeaponForEnemy(enemy);
 
         DamageableTarget target = enemy.GetComponentInChildren<DamageableTarget>();
         if (target != null)
@@ -78,10 +98,9 @@ public class WaveLogic : MonoBehaviour
             target.SetHealth(enemiesHealth);
             target.Died += OnEnemyDied;
         }
-
     }
 
-    void AssignWeaponForEnemy(GameObject enemy, int enemyType)
+    void AssignWeaponForEnemy(GameObject enemy)
     {
         EnemyWeapon weaponHolder = enemy.GetComponent<EnemyWeapon>();
         if (weaponHolder != null) weaponHolder.EquipRandomWeapon();
@@ -91,12 +110,14 @@ public class WaveLogic : MonoBehaviour
     {
         deadEnemy.Died -= OnEnemyDied;
         enemiesAlive--;
+        if (enemiesAlive != 0) return;
 
-        if (enemiesAlive <= 0)
-        {
-            currentWave++;
-            Invoke(nameof(SetWave), timeBetweenWaves);
-        }
+        CancelInvoke(nameof(SpawnNextEnemy));
+        if (playerHealth != null && playerHealth.IsDead) return;
+        if (currentWave < FinalWave && playerHealth != null) playerHealth.TryHeal(roundHealing);
+
+        currentWave++;
+        Invoke(nameof(SetWave), timeBetweenWaves);
     }
 
     [ContextMenu("Matar Todos (Prueba)")]
@@ -104,7 +125,8 @@ public class WaveLogic : MonoBehaviour
     {
         foreach (var enemy in FindObjectsByType<DamageableTarget>(FindObjectsSortMode.None))
         {
-            enemy.TakeDamage(enemy.MaximumHealth);
+            if (enemy != playerHealth && enemy.GetComponent<PlayerCombatRig>() == null)
+                enemy.TakeDamage(enemy.MaximumHealth);
         }
     }
 }
