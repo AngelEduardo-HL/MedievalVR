@@ -828,7 +828,6 @@ MonoBehaviour:
   stopDistance: 2
   separationRadius: 1.2
   separationForce: 2
-  attackCooldown: 2
 --- !u!64 &6696870152608234498
 MeshCollider:
   m_ObjectHideFlags: 0
