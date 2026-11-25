@@ -3,6 +3,8 @@ using MedievalVR.Combat;
 
 public class WaveLogic : MonoBehaviour
 {
+    const int FinalWave = 5;
+
     public EnemySpawner spawner;
     public float spawnInterval = 3f;
     public float timeBetweenWaves = 5f;
@@ -15,6 +17,8 @@ public class WaveLogic : MonoBehaviour
 
     public int enemiesSpawned;
     public int enemiesAlive;
+
+    public Victory victory;
 
     void Start()
     {
@@ -36,30 +40,35 @@ public class WaveLogic : MonoBehaviour
     void SetWave()
     {
         if (playerHealth != null && playerHealth.IsDead) return;
+        if (currentWave == FinalWave + 1)
+        {
+            if (victory != null) victory.PlayFireworks();
+            return;
+        }
+
         switch (currentWave)
         {
             case 1:
-                enemiesPerWave = 5;
-                enemiesHealth = 50f;
+                enemiesPerWave = 3;
+                enemiesHealth = 20f;
                 break;
             case 2:
+                enemiesPerWave = 5;
+                enemiesHealth = 40f;
+                break;
+            case 3:
+                enemiesPerWave = 7;
+                enemiesHealth = 60f;
+                break;
+            case 4:
                 enemiesPerWave = 10;
                 enemiesHealth = 80f;
                 break;
-            case 3:
-                enemiesPerWave = 15;
-                enemiesHealth = 120f;
-                break;
-            case 4:
-                enemiesPerWave = 20;
-                enemiesHealth = 160f;
-                break;
             case 5:
-                enemiesPerWave = 25;
-                enemiesHealth = 220f;
+                enemiesPerWave = 15;
+                enemiesHealth = 100f;
                 break;
             default:
-                Debug.Log("¡Victoria!");
                 return;
         }
 
@@ -78,7 +87,6 @@ public class WaveLogic : MonoBehaviour
 
         int maxEnemyIndex = Mathf.Min(currentWave - 1, 4);
         int enemyType = Random.Range(0, maxEnemyIndex + 1);
-
         GameObject enemy = spawner.SpawnEnemy(enemyType);
         enemiesSpawned++;
 
@@ -102,13 +110,14 @@ public class WaveLogic : MonoBehaviour
     {
         deadEnemy.Died -= OnEnemyDied;
         enemiesAlive--;
+        if (enemiesAlive != 0) return;
 
-        if (enemiesAlive <= 0)
-        {
-            if (currentWave < 5 && playerHealth != null) playerHealth.TryHeal(roundHealing);
-            currentWave++;
-            if (playerHealth == null || !playerHealth.IsDead) Invoke(nameof(SetWave), timeBetweenWaves);
-        }
+        CancelInvoke(nameof(SpawnNextEnemy));
+        if (playerHealth != null && playerHealth.IsDead) return;
+        if (currentWave < FinalWave && playerHealth != null) playerHealth.TryHeal(roundHealing);
+
+        currentWave++;
+        Invoke(nameof(SetWave), timeBetweenWaves);
     }
 
     [ContextMenu("Matar Todos (Prueba)")]
