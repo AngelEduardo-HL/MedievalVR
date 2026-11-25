@@ -19,7 +19,9 @@ public class EnemyWeapon : MonoBehaviour
 
     public void UnequipWeapon()
     {
-        currentWeapon.transform.parent = null;
+        if (currentWeapon == null) return;
+        currentWeapon.transform.SetParent(null, true);
+        currentWeapon = null;
     }
 
 }

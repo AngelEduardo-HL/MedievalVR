@@ -397,3 +397,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MedievalVR.Combat.WeaponImpact
   baseDamage: 30
+  equipmentKind: 1

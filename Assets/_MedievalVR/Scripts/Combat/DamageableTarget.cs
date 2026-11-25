@@ -15,6 +15,7 @@ namespace MedievalVR.Combat
         [SerializeField, Min(0f), Tooltip("Cooldown por objeto (s).")]
         float sameObjectHitCooldown = 0.25f;
         [SerializeField] bool destroyOnDeath = true;
+        [SerializeField] bool receiveCollisionDamage = true;
         [SerializeField] Renderer targetRenderer;
         [SerializeField, Min(0f)] float hitFlashDuration = 0.08f;
         [SerializeField] float currentHealth;
@@ -30,6 +31,7 @@ namespace MedievalVR.Combat
         public float CurrentHealth => currentHealth;
         public float MaximumHealth => maximumHealth;
         public bool IsDead => currentHealth <= 0f;
+        public bool CanHeal => !IsDead && currentHealth < maximumHealth;
         public event Action<DamageableTarget> HealthChanged;
         public event Action<DamageableTarget> Died;
 
@@ -47,11 +49,12 @@ namespace MedievalVR.Combat
 
         void OnCollisionEnter(Collision collision)
         {
+            if (!receiveCollisionDamage || IsDead) return;
             Rigidbody otherBody = collision.rigidbody;
-            if (IsDead || otherBody == null || otherBody.transform.IsChildOf(transform)) return;
+            if (otherBody == null || otherBody.transform.IsChildOf(transform)) return;
 
             var weapon = otherBody.GetComponent<WeaponImpact>();
-            if (weapon != null && !weapon.isActiveAndEnabled) return;
+            if (weapon != null && !weapon.CanDealImpactDamage) return;
 
             float impactSpeed = weapon != null ? 0f : collision.relativeVelocity.magnitude;
             float requiredSpeed = weapon != null
@@ -92,6 +95,14 @@ namespace MedievalVR.Combat
                 Died?.Invoke(this);
                 if (destroyOnDeath) Destroy(gameObject);
             }
+        }
+
+        public bool TryHeal(float amount)
+        {
+            if (!CanHeal || amount <= 0f || float.IsNaN(amount) || float.IsInfinity(amount)) return false;
+            currentHealth = Mathf.Min(maximumHealth, currentHealth + amount);
+            HealthChanged?.Invoke(this);
+            return true;
         }
 
         [ContextMenu("Restablecer vida")]
